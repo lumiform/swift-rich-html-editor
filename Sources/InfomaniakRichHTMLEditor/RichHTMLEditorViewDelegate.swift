@@ -98,6 +98,20 @@ public protocol RichHTMLEditorViewDelegate: AnyObject {
     ///
     /// - Returns: `false` if the editor should handle the link opening itself.
     func richHTMLEditorView(_ richHTMLEditorView: RichHTMLEditorView, shouldHandleLink link: URL) -> Bool
+    
+    /// Notifies the delegate when the content height of the editor changes.
+    ///
+    /// This method is useful when you want to dynamically adjust the layout of the
+    /// editor's container based on the content's
+    /// intrinsic height. It is called whenever the rendered height of the HTML content
+    /// changes, including during editing or after content is programmatically updated.
+    ///
+    /// Implementation of this method is optional.
+    ///
+    /// - Parameters:
+    ///   - richHTMLEditorView: The instance of the editor whose content height changed.
+    ///   - height: The new height of the content in points.
+    func richHTMLEditorView(_ richHTMLEditorView: RichHTMLEditorView, contentHeightDidChange height: CGFloat)
 }
 
 // Default implementation for optional functions
@@ -117,4 +131,5 @@ public extension RichHTMLEditorViewDelegate {
     func richHTMLEditorView(_ richHTMLEditorView: RichHTMLEditorView, shouldHandleLink link: URL) -> Bool {
         return false
     }
+    func richHTMLEditorView(_ richHTMLEditorView: RichHTMLEditorView, contentHeightDidChange height: CGFloat) {}
 }
