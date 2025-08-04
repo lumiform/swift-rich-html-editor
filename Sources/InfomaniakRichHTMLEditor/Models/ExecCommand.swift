@@ -25,13 +25,14 @@ enum ExecCommand: String, CaseIterable, Sendable {
     case justifyCenter
     case justifyRight
     case justifyFull
-
+    case formatBlock
+    
     // Commands that return a value
     case fontName
     case fontSize
     case backgroundColor = "backColor"
     case foregroundColor = "foreColor"
-
+    
     // Commands that return nothing
     case removeFormat
     case undo

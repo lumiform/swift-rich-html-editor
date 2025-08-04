@@ -19,6 +19,7 @@ public extension RichHTMLEditorView {
     /// Removes all formatting from the current selection.
     func removeFormat() {
         execCommand(.removeFormat)
+        execCommand(.formatBlock, argument: "p")
     }
 
     /// Toggles bold for the current selection or at the insertion point.
@@ -143,6 +144,10 @@ public extension RichHTMLEditorView {
         case .selector(let selector):
             javaScriptManager.setCaretAtSelector(selector: selector)
         }
+    }
+    
+    func setHeading(_ level: Int) {
+        execCommand(.formatBlock, argument: "h\(level)")
     }
 
     private func execCommand(_ command: ExecCommand, argument: Sendable? = nil) {

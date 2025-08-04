@@ -21,7 +21,8 @@ const valueCommands = {
     fontName: "fontName",
     rawFontSize: "fontSize",
     rawForegroundColor: "foreColor",
-    rawBackgroundColor: "backColor"
+    rawBackgroundColor: "backColor",
+    formatBlock: "formatBlock"
 };
 
 // MARK: - Compute and report TextAttributes

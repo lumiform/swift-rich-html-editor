@@ -35,6 +35,8 @@ public struct UITextAttributes: Codable, Sendable {
     public var fontSize: Int? {
         return Int(rawFontSize)
     }
+    
+    public var formatBlock: String = ""
 
     public var foregroundColor: PlatformColor? {
         return PlatformColor(rgba: rawForegroundColor)
