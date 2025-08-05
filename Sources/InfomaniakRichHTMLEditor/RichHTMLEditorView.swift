@@ -273,6 +273,18 @@ public extension RichHTMLEditorView {
     private func setScrollableBehavior(_ isScrollEnabled: Bool) {
         rawIsScrollEnabled = isScrollEnabled
         webView.scrollView.isScrollEnabled = isScrollEnabled
+        webView.scrollView.contentInsetAdjustmentBehavior = .never
+        /// This code disables automatic adjustment of content insets in `WKWebView` when the keyboard appears,
+        /// ensuring that the layout and scrollable area remain consistent regardless of keyboard visibility.
+        NotificationCenter.default.removeObserver(self.webView,
+                                                  name: UIResponder.keyboardWillChangeFrameNotification,
+                                                  object: nil)
+        NotificationCenter.default.removeObserver(self.webView,
+                                                  name: UIResponder.keyboardWillShowNotification,
+                                                  object: nil)
+        NotificationCenter.default.removeObserver(self.webView,
+                                                  name: UIResponder.keyboardWillHideNotification,
+                                                  object: nil)
     }
     #endif
 }
