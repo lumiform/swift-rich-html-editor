@@ -19,7 +19,7 @@ public extension RichHTMLEditorView {
     /// Removes all formatting from the current selection.
     func removeFormat() {
         execCommand(.removeFormat)
-        execCommand(.formatBlock, argument: "p")
+        execCommand(.formatBlock, argument: "div")
     }
 
     /// Toggles bold for the current selection or at the insertion point.
