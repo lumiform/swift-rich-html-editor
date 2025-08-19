@@ -133,7 +133,7 @@ public extension TextAttributes {
     ///
     /// - Parameter position: The position where the caret should be placed.
     func setCaretAt(_ position: CaretPosition) {
-        editor?.setCaretAt(position)
+//        editor?.setCaretAt(position)
     }
     
     func setHeading(_ level: Int) {

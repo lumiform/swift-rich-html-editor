@@ -104,7 +104,7 @@ final class ScriptMessageHandler: NSObject, WKScriptMessageHandler {
             width: max(1, caretData[2]),
             height: max(1, caretData[3])
         )
-        delegate?.caretPositionDidChange(caretPosition)
+//        delegate?.caretPositionDidChange(caretPosition)
     }
 
     private func scriptLog(_ message: WKScriptMessage) {

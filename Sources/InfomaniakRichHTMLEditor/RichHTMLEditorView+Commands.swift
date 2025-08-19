@@ -136,14 +136,14 @@ public extension RichHTMLEditorView {
     ///
     /// - Parameter position: The position where the caret should be placed.
     func setCaretAt(_ position: CaretPosition) {
-        switch position {
-        case .beginningOfDocument:
-            javaScriptManager.setCaretAtBeginningOfDocument()
-        case .endOfDocument:
-            javaScriptManager.setCaretAtEndOfDocument()
-        case .selector(let selector):
-            javaScriptManager.setCaretAtSelector(selector: selector)
-        }
+//        switch position {
+//        case .beginningOfDocument:
+//            javaScriptManager.setCaretAtBeginningOfDocument()
+//        case .endOfDocument:
+//            javaScriptManager.setCaretAtEndOfDocument()
+//        case .selector(let selector):
+//            javaScriptManager.setCaretAtSelector(selector: selector)
+//        }
     }
     
     func setHeading(_ level: Int) {

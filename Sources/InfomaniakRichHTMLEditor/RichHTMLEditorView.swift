@@ -356,18 +356,18 @@ extension RichHTMLEditorView: ScriptMessageHandlerDelegate {
     }
 
     func caretRectDidChange(_ position: CGRect) {
-        delegate?.richHTMLEditorView(self, caretPositionDidChange: position)
+//        delegate?.richHTMLEditorView(self, caretPositionDidChange: position)
     }
 
     func caretPositionDidChange(_ caretRect: CGRect) {
-        delegate?.richHTMLEditorView(self, caretPositionDidChange: caretRect)
-
-        #if canImport(UIKit)
-        if !isScrollEnabled, let scrollView = findClosestScrollView() {
-            let scrollRect = convert(caretRect, to: scrollView)
-            scrollView.scrollRectToVisible(scrollRect, animated: true)
-        }
-        #endif
+//        delegate?.richHTMLEditorView(self, caretPositionDidChange: caretRect)
+//
+//        #if canImport(UIKit)
+//        if !isScrollEnabled, let scrollView = findClosestScrollView() {
+//            let scrollRect = convert(caretRect, to: scrollView)
+//            scrollView.scrollRectToVisible(scrollRect, animated: true)
+//        }
+//        #endif
     }
 }
 
