@@ -89,6 +89,12 @@ function unlinkAnchorNode(anchor) {
 
 // MARK: - Utils
 
+function getSelectedText() {
+    const range = getRange();
+    if (!range || range.collapsed) return "";
+    return range.toString();
+}
+
 function updateAnchorText(anchor, text) {
     if (text !== null && anchor.textContent !== text) {
         anchor.textContent = text;

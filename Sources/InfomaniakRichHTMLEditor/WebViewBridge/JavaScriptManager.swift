@@ -78,6 +78,13 @@ final class JavaScriptManager {
     func setCaretAtSelector(selector: String) {
         evaluate(function: .setCaretAtSelector(selector: selector))
     }
+    
+    func getSelectedText(completion: @escaping (String?) -> Void) {
+        evaluate(function: .getSelectedText) { result in
+            completion(result as? String)
+            
+        }
+    }
 
     private func evaluateWaitingFunctions() {
         guard isDOMContentLoaded else {
@@ -98,10 +105,12 @@ final class JavaScriptManager {
         evaluate(function: function)
     }
 
-    private func evaluate(function: JavaScriptFunction) {
-        webView?.evaluateJavaScript(function.call()) { [weak self] _, error in
+    private func evaluate(function: JavaScriptFunction, completion: ((_ result: Any) -> Void)? = nil) {
+        webView?.evaluateJavaScript(function.call()) { [weak self] result, error in
             if let error {
                 self?.delegate?.javascriptFunctionDidFail(error: error, function: function.identifier)
+            } else if let result {
+                completion?(result)
             }
         }
     }

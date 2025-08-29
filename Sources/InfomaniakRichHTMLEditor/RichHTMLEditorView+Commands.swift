@@ -149,6 +149,10 @@ public extension RichHTMLEditorView {
     func setHeading(_ level: Int) {
         execCommand(.formatBlock, argument: "h\(level)")
     }
+    
+    func getSelectedText(completion: @escaping (String?) -> Void) {
+        javaScriptManager.getSelectedText(completion: completion)
+    }
 
     private func execCommand(_ command: ExecCommand, argument: Sendable? = nil) {
         javaScriptManager.execCommand(command, argument: argument)
