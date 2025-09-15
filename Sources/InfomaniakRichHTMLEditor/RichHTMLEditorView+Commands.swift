@@ -19,6 +19,7 @@ public extension RichHTMLEditorView {
     /// Removes all formatting from the current selection.
     func removeFormat() {
         execCommand(.removeFormat)
+        unlink()
         execCommand(.formatBlock, argument: "div")
     }
 
