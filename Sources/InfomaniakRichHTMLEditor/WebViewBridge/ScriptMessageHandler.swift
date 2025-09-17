@@ -112,5 +112,6 @@ final class ScriptMessageHandler: NSObject, WKScriptMessageHandler {
             return
         }
         logger.info("[ScriptLog] \(log)")
+        print("[ScriptLog] \(log)")
     }
 }
