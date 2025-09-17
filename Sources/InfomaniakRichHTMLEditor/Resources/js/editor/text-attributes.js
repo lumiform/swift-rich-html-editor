@@ -77,23 +77,45 @@ function getSelectionFormatting() {
     const nodes = [];
 
     // Case: selection inside single text node
-    if (
-        range.startContainer === range.endContainer &&
-        range.startContainer.nodeType === Node.TEXT_NODE
+        if (
+            range.startContainer === range.endContainer &&
+            range.startContainer.nodeType === Node.TEXT_NODE
         ) {
-            nodes.push(range.startContainer);
+            if (range.startContainer.textContent && range.startContainer.textContent.trim().length > 0) {
+                nodes.push(range.startContainer);
+            }
         } else {
             // Case: spans multiple nodes
-            const treeWalker = document.createTreeWalker(range.commonAncestorContainer,
-                                                         NodeFilter.SHOW_TEXT, {
-                acceptNode: (node) =>
-                range.intersectsNode(node)
-                ? NodeFilter.FILTER_ACCEPT
-                : NodeFilter.FILTER_REJECT,
-            });
+            const treeWalker = document.createTreeWalker(
+                range.commonAncestorContainer,
+                NodeFilter.SHOW_TEXT,
+                {
+                    acceptNode: (node) => {
+                        // Only accept nodes that intersect with the range and have non-empty content
+                        if (
+                            range.intersectsNode(node) &&
+                            node.textContent &&
+                            node.textContent.trim().length > 0
+                        ) {
+                            return NodeFilter.FILTER_ACCEPT;
+                        }
+                        return NodeFilter.FILTER_REJECT;
+                    },
+                }
+            );
 
             while (treeWalker.nextNode()) {
-                nodes.push(treeWalker.currentNode);
+                // Only add nodes that are actually within the selection range
+                const node = treeWalker.currentNode;
+                // Further check: node must be at least partially selected
+                const nodeRange = document.createRange();
+                nodeRange.selectNodeContents(node);
+                if (
+                    range.compareBoundaryPoints(Range.END_TO_START, nodeRange) < 0 &&
+                    range.compareBoundaryPoints(Range.START_TO_END, nodeRange) > 0
+                ) {
+                    nodes.push(node);
+                }
             }
         }
 
@@ -110,7 +132,7 @@ function getSelectionFormatting() {
 
         return {
             hasBold: styles.fontWeight === "bold" || parseInt(styles.fontWeight) >= 600,
-            hasItalic: styles.fontStyle === "italic",
+            hasItalic: styles.fontStyle === "italic" || parentEl.tagName.toLowerCase() === "i",
             hasUnderline: inheritedDecoration.includes("underline"),
             hasStrikeThrough: inheritedDecoration.includes("line-through"),
             hasSubscript: parentEl.tagName.toLowerCase() === "sub",
@@ -129,7 +151,7 @@ function getSelectionFormatting() {
                 const align = styles.textAlign;
                 if (align === "justify") return "full";
                 if (["left", "center", "right"].includes(align)) return align;
-                return "left"; // default
+                return "left";
             })(),
         };
     })
@@ -148,7 +170,12 @@ function getSelectionFormatting() {
             finalFormatting[key] = firstVal;
         } else  if(typeof firstVal === 'boolean') {
             finalFormatting[key] = false;
-        } else {
+        } else if( key === 'rawForegroundColor' ) {
+            finalFormatting[key] = 'rgb(0, 0, 0)';
+        }  else if( key === 'rawBackgroundColor' ) {
+            finalFormatting[key] = 'rgba(0, 0, 0, 0)';
+        }
+        else {
             finalFormatting[key] = nodeFormats[0][key];
         }
     });
