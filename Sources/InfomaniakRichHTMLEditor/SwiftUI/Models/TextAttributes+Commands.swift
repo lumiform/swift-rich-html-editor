@@ -139,4 +139,9 @@ public extension TextAttributes {
     func setHeading(_ level: Int) {
         editor?.setHeading(level)
     }
+    
+    /// Transforms ul/ol elements wrapped in colored spans or font tags to use font tags within list items.
+    func transformColoredLists() {
+        editor?.transformColoredLists()
+    }
 }

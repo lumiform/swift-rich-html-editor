@@ -56,11 +56,15 @@ public extension RichHTMLEditorView {
     /// Creates or remove a numbered ordered list for the current selection or at the insertion point.
     func orderedList() {
         execCommand(.orderedList)
+        // Transform any colored lists after creating the ordered list
+        javaScriptManager.transformColoredLists()
     }
 
     /// Creates or remove a bulleted unordered list for the current selection or at the insertion point.
     func unorderedList() {
         execCommand(.unorderedList)
+        // Transform any colored lists after creating the unordered list
+        javaScriptManager.transformColoredLists()
     }
 
     /// Creates a new link for the current selection or at the insertion point.
@@ -153,6 +157,11 @@ public extension RichHTMLEditorView {
     
     func getSelectedText(completion: @escaping (String?) -> Void) {
         javaScriptManager.getSelectedText(completion: completion)
+    }
+    
+    /// Transforms ul/ol elements wrapped in colored spans or font tags to use font tags within list items.
+    func transformColoredLists() {
+        javaScriptManager.transformColoredLists()
     }
 
     private func execCommand(_ command: ExecCommand, argument: Sendable? = nil) {

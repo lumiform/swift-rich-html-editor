@@ -23,6 +23,7 @@ enum JavaScriptFunction: Sendable {
     case setCaretAtEndOfDocument
     case setCaretAtSelector(selector: String)
     case getSelectedText
+    case transformColoredLists
 
     var identifier: String {
         switch self {
@@ -48,6 +49,8 @@ enum JavaScriptFunction: Sendable {
             return "setCaretAtSelector"
         case .getSelectedText:
             return "getSelectedText"
+        case .transformColoredLists:
+            return "transformColoredLists"
         }
     }
 
@@ -63,7 +66,7 @@ enum JavaScriptFunction: Sendable {
             return [url, text]
         case .setCaretAtSelector(let selector):
             return [selector]
-        case .unlink, .focus, .blur, .setCaretAtBeginningOfDocument, .setCaretAtEndOfDocument, .getSelectedText:
+        case .unlink, .focus, .blur, .setCaretAtBeginningOfDocument, .setCaretAtEndOfDocument, .getSelectedText, .transformColoredLists:
             return []
         }
     }

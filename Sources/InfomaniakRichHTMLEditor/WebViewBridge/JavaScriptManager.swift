@@ -85,6 +85,10 @@ final class JavaScriptManager {
             
         }
     }
+    
+    func transformColoredLists() {
+        evaluate(function: .transformColoredLists)
+    }
 
     private func evaluateWaitingFunctions() {
         guard isDOMContentLoaded else {
