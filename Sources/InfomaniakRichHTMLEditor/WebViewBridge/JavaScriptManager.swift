@@ -85,14 +85,6 @@ final class JavaScriptManager {
             
         }
     }
-    
-    func convertToOrderedList() {
-        evaluate(function: .convertToOrderedList)
-    }
-    
-    func convertToUnorderedList() {
-        evaluate(function: .convertToUnorderedList)
-    }
 
     private func evaluateWaitingFunctions() {
         guard isDOMContentLoaded else {

@@ -55,12 +55,12 @@ public extension RichHTMLEditorView {
 
     /// Creates or remove a numbered ordered list for the current selection or at the insertion point.
     func orderedList() {
-        javaScriptManager.convertToOrderedList()
+        execCommand(.orderedList)
     }
 
     /// Creates or remove a bulleted unordered list for the current selection or at the insertion point.
     func unorderedList() {
-        javaScriptManager.convertToUnorderedList()
+        execCommand(.unorderedList)
     }
 
     /// Creates a new link for the current selection or at the insertion point.
